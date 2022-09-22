@@ -8,7 +8,8 @@ const socketio = require("socket.io");
 const session = require('express-session')
 
 const usersRouter = require('./routes/api/user');
-const matchModel = require('./routes/api/match')
+const matchRouter = require('./routes/api/match')
+const otpRouter = require('./routes/api/otps')
 
 const app = express();
 const server = require('http').createServer(app);
@@ -32,8 +33,9 @@ app.use(session({
   cookie: { secure: false }
 }))
 
-app.use('/api/user', usersRouter);
-app.use('/api/match', matchModel)
+app.use('/api/user', usersRouter)
+app.use('/api/match', matchRouter)
+app.use('/api/otp', otpRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

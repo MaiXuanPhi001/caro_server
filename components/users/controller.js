@@ -71,3 +71,14 @@ exports.getAll = async () => {
         return { error: true, status: 200, data: [] }
     }
 }
+
+exports.changePassword = async (email, password) => {
+    try {
+        const newPassword = await bcrypt.hash(password + '', await bcrypt.genSalt(10))
+        await userService.changePassword(email, newPassword)
+        return { error: false, status: 200 }
+    } catch (error) {
+        console.log('err: ', error)
+        return { error: true, status: 200 }
+    }
+}

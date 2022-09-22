@@ -24,6 +24,18 @@ exports.getAll = async () => {
     return await userModel.find({}, { password: 0 })
 }
 
+exports.changePassword = async (email, password) => {
+    await userModel.updateOne(
+        { email },
+        {
+            $set:
+            {
+                password
+            }
+        }
+    )
+}
+
 exports.update = async (body) => {
     const arr =
         [

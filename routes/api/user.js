@@ -32,5 +32,10 @@ router.get('/getAll', async function (req, res, next) {
     res.status(result.status).json(result)
 })
 
+router.post('/changePassword', async function (req, res, next) {
+    const { email, newPassword } = req.body
+    const result = await userController.changePassword(email, newPassword)
+    res.status(result.status).json(result)
+})
 
 module.exports = router;
