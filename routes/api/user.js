@@ -10,8 +10,8 @@ router.post('/login', async (req, res, next) => {
 
 router.post('/register', async (req, res, next) => {
     const { body } = req
+    body.img = 'https://caroserverxuanphi.herokuapp.com/images/user' + Math.floor((Math.random() * 5) + 1) + '.png'
     const result = await userController.register(body)
-    body.img = 'http://localhost:3000/images/profile.png'
     res.status(result.status).json(result)
 });
 

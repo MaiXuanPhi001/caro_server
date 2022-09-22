@@ -30,7 +30,7 @@ exports.register = async (user) => {
         const email = await userService.getByEmail(user.email)
         if (email) return { error: false, status: 200, result_code: 0, message: 'Email already exist' }
         const newPassword = await bcrypt.hash(user.password, await bcrypt.genSalt(10))
-        await userService.register({ ...user, password: newPassword, img: 'http://localhost:3000/images/profile.png' })
+        await userService.register({ ...user, password: newPassword })
         return { error: false, status: 200, result_code: 1, message: 'Register success' }
     } catch (error) {
         return { error: true, status: 200, message: 'Register success' }
