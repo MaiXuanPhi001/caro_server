@@ -48,14 +48,13 @@ exports.sendOTP = async (email) => {
 
 exports.veryOtp = async (email, codeOTP) => {
     try {
-        const emailer = otpService.findByEmail(email)
+        const emailer = await otpService.findByEmail(email)
         if (emailer) {
-            if (emailer.code === codeOTP) return { error: false, status: 200, result_code: 1, message: 'Code correct' }
+            if (emailer.code == codeOTP) return { error: false, status: 200, result_code: 1, message: 'Code correct' }
             return { error: false, status: 200, result_code: 0, message: 'Code incorrect' }
         }
         return { error: false, status: 200, result_code: 0, message: 'Code incorrect' }
     } catch (error) {
         return { error: true, status: 200, message: 'err: ' + error }
     }
-
 }
